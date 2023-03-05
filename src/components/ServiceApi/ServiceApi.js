@@ -10,10 +10,10 @@ const instance = axios.create({
   },
 });
 
-export const searchQueryApi = async (query, page) => {
+export const getImages = async (query, page) => {
   const response = await instance(`?q=${query}&page=${page}`);
-  const pics = await response.data;
-  return pics;
+  const data = await response.data;
+  return data;
 };
 
 // const KEY = '32977164-db809f268a8ff4387fbfd100d';

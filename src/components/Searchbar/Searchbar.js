@@ -1,5 +1,12 @@
 import { Component } from 'react';
 // import { Formik, Field, Form } from 'formik';
+import {
+  SearchbarHeader,
+  SearchForm,
+  SearchFormButton,
+  SearchFormButtonLabel,
+  SearchFormInput,
+} from './SearchBar.styled';
 
 export default class SearchBar extends Component {
   state = {
@@ -8,11 +15,14 @@ export default class SearchBar extends Component {
 
   handleOnChage = evt => {
     const query = evt.currentTarget.value;
-    this.setState({ searchQuery: query.toLowerCase() });
+    this.setState({ searchQuery: query.toLowerCase().trim() });
   };
 
   handleOnSubmit = evt => {
     const { searchQuery } = this.state;
+    if (!searchQuery) {
+      alert('corect name input');
+    }
     evt.preventDefault();
     this.props.onSubmit(searchQuery);
     this.reset();
@@ -24,10 +34,12 @@ export default class SearchBar extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleOnSubmit}>
-        <label htmlFor="searchQuery">
-          Seacrh
-          <input
+      <SearchbarHeader>
+        <SearchForm onSubmit={this.handleOnSubmit}>
+          <SearchFormButton type="submit">
+            <SearchFormButtonLabel>Search</SearchFormButtonLabel>
+          </SearchFormButton>
+          <SearchFormInput
             type="text"
             name="searchQuery"
             onChange={this.handleOnChage}
@@ -36,9 +48,8 @@ export default class SearchBar extends Component {
             autoFocus
             placeholder="Search images and photos"
           />
-        </label>
-        <button type="submit">Submit</button>
-      </form>
+        </SearchForm>
+      </SearchbarHeader>
     );
   }
 }
