@@ -4,7 +4,7 @@ import { Layout } from './Layout/Layout';
 import  SearchBar from './Searchbar/Searchbar';
 // import { searchQueryApi } from './ServiceApi/ServiceApi';
 import { ImageGallery } from './ImageGallery/ImageGllery';
-
+import { Toaster } from 'react-hot-toast';
 
 
 export class App extends Component {
@@ -13,13 +13,6 @@ export class App extends Component {
     page: 1
   };
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   const { query, page } = this.state;
-  //   if (prevState.query !== query) {
-  //     searchQueryApi(query, page).then(pics => console.log(pics)).catch(err => err.message)
-    
-  //   }
-  // }
 
   searchFormSubmit = searchQuery => {
     this.setState({query: searchQuery})
@@ -33,6 +26,10 @@ export class App extends Component {
         <SearchBar onSubmit={this.searchFormSubmit} />
         <ImageGallery value={query} />
         <GlobalStyle />
+        <Toaster
+  position="top-center"
+  reverseOrder={false}
+  gutter={8} />
       </Layout>
     );
   }

@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
+import toast from 'react-hot-toast';
 
 import { getImages } from '../ServiceApi/ServiceApi';
 import { ImageGalleryItem } from '../ImageGalleryItem/ImageGalleryItem';
@@ -79,6 +80,9 @@ export class ImageGallery extends Component {
         items: [...items, ...data.hits],
         totalHits: data.totalHits,
       }));
+      if (data.totalHits === 0) {
+        toast.error('Nothing was found for your request', { duration: 1000 });
+      }
     } catch (error) {
       this.setState({ error: error.message });
     } finally {

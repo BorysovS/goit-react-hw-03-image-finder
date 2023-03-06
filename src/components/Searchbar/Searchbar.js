@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
+import toast from 'react-hot-toast';
 // import { Formik, Field, Form } from 'formik';
 import {
   SearchbarHeader,
@@ -22,7 +23,7 @@ export default class SearchBar extends Component {
   handleOnSubmit = evt => {
     const { searchQuery } = this.state;
     if (!searchQuery) {
-      alert('Enter correct find name');
+      toast.error('Please, enter find name', { duration: 1000 });
     }
     evt.preventDefault();
     this.props.onSubmit(searchQuery);
