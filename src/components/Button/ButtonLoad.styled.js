@@ -2,17 +2,18 @@ import styled from 'styled-components';
 
 export const ButtonLoad = styled.button`
   padding: 8px 16px;
-  margin: auto;
+  margin: 12px auto;
   border-radius: 2px;
   background-color: #3f51b5;
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   text-align: center;
-  display: inline-block;
+  display: block;
   color: #fff;
   border: 0;
   text-decoration: none;
   cursor: pointer;
   font-family: inherit;
+  text-align: center;
   font-size: 18px;
   line-height: 24px;
   font-style: normal;

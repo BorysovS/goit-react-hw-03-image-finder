@@ -1,9 +1,10 @@
 import { Component } from 'react';
 import { GlobalStyle } from './GlobalStyle';
 import { Layout } from './Layout/Layout';
-import SearchBar from './Searchbar/Searchbar';
+import  SearchBar from './Searchbar/Searchbar';
 // import { searchQueryApi } from './ServiceApi/ServiceApi';
 import { ImageGallery } from './ImageGallery/ImageGllery';
+
 
 
 export class App extends Component {
@@ -36,3 +37,5 @@ export class App extends Component {
     );
   }
 };
+
+

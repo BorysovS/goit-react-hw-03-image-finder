@@ -8,7 +8,11 @@ export const Loader = () => {
       color="#4fa94d"
       ariaLabel="grid-loading"
       radius="12.5"
-      wrapperStyle={{ justifyContent: 'center' }}
+      wrapperStyle={{
+        justifyContent: 'center',
+        alignItems: 'center',
+        display: 'flex',
+      }}
       visible={true}
     />
   );

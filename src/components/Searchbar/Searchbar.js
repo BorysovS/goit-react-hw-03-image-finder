@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 // import { Formik, Field, Form } from 'formik';
 import {
   SearchbarHeader,
@@ -21,7 +22,7 @@ export default class SearchBar extends Component {
   handleOnSubmit = evt => {
     const { searchQuery } = this.state;
     if (!searchQuery) {
-      alert('corect name input');
+      alert('Enter correct find name');
     }
     evt.preventDefault();
     this.props.onSubmit(searchQuery);
@@ -53,3 +54,7 @@ export default class SearchBar extends Component {
     );
   }
 }
+
+SearchBar.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
