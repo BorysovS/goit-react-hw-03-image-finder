@@ -15,16 +15,23 @@ export class App extends Component {
 
 
   searchFormSubmit = searchQuery => {
-    this.setState({query: searchQuery})
+    this.setState({query: searchQuery, page: 1})
+    
+  };
+
+    handleLoadMore = () => {
+    this.setState(prevState => ({
+      page: prevState.page + 1,
+    }));
   };
 
 
   render() {
-    const { query } = this.state
+    const { query,page } = this.state
     return (
       <Layout>
         <SearchBar onSubmit={this.searchFormSubmit} />
-        <ImageGallery value={query} />
+        <ImageGallery value={query} page={page} loadMore={ this.handleLoadMore} />
         <GlobalStyle />
         <Toaster
   position="top-center"

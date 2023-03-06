@@ -23,7 +23,6 @@ function smoothScroll() {
 
 export class ImageGallery extends Component {
   state = {
-    page: 1,
     items: [],
     isLoading: false,
     visibleBtn: false,
@@ -35,26 +34,19 @@ export class ImageGallery extends Component {
     showModal: false,
   };
 
-  handleLoadMore = () => {
-    this.setState(prevState => ({
-      page: prevState.page + 1,
-    }));
-  };
-
   componentDidUpdate(prevProps, prevState) {
-    const { items, page, visibleBtn } = this.state;
-    const { value } = this.props;
+    const { items, visibleBtn } = this.state;
+    const { value, page } = this.props;
 
     if (prevProps.value !== value) {
       this.setState(prevState => ({
         ...prevState,
         items: [],
-        page: 1,
         totalHits: 0,
       }));
     }
 
-    if (prevProps.value !== value || prevState.page !== page) {
+    if (prevProps.value !== value || prevProps.page !== page) {
       this.getFetchApi();
     }
 
@@ -73,13 +65,15 @@ export class ImageGallery extends Component {
   async getFetchApi() {
     try {
       this.setState({ isLoading: true });
-      const { page } = this.state;
-      const { value } = this.props;
+
+      const { value, page } = this.props;
+
       const data = await getImages(value, page);
       this.setState(({ items }) => ({
         items: [...items, ...data.hits],
         totalHits: data.totalHits,
       }));
+
       if (data.totalHits === 0) {
         toast.error('Nothing was found for your request', { duration: 1000 });
       }
@@ -107,7 +101,7 @@ export class ImageGallery extends Component {
           <ImageGalleryItem items={items} onClick={this.handleShowModal} />
         </GalleryList>
         {isLoading && <Loader />}
-        {visibleBtn && <Button onClick={this.handleLoadMore} />}
+        {visibleBtn && <Button onClick={() => this.props.loadMore()} />}
         {this.state.showModal && (
           <Modal
             imageModal={this.state.modalImage}
@@ -122,4 +116,6 @@ export class ImageGallery extends Component {
 
 ImageGallery.propTypes = {
   value: PropTypes.string.isRequired,
+  page: PropTypes.number.isRequired,
+  loadMore: PropTypes.func.isRequired,
 };
