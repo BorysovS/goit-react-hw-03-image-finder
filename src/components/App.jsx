@@ -13,7 +13,6 @@ export class App extends Component {
     page: 1
   };
 
-
   searchFormSubmit = searchQuery => {
     this.setState({query: searchQuery, page: 1})
     
@@ -24,7 +23,6 @@ export class App extends Component {
       page: prevState.page + 1,
     }));
   };
-
 
   render() {
     const { query,page } = this.state
